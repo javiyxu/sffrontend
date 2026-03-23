@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto&display=swap');
+
+/* General Body */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #ffe6b3, #ffd699);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 3em;
+    color: #d1411e;
+    text-shadow: 2px 2px #ffcc80;
+    margin: 20px 0;
+    animation: bounce 1s infinite alternate;
+}
+
+/* Container */
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+}
+
+/* Form */
+#form {
+    background: #fff3e6;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    min-width: 300px;
+    flex: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+
+/* Form Elements */
+#form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #d1411e;
+}
+#form input, #form select, #form button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 10px;
+    border: 1px solid #d9a066;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#form input:focus, #form select:focus {
+    outline: none;
+    box-shadow: 0 0 10px #ff9933;
+    transform: scale(1.02);
+}
+
+/* Buttons */
+#form button {
+    background: #d1411e;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+#form button:hover {
+    background: #ff9933;
+    transform: scale(1.05);
+}
+
+/* Table Wrapper */
+#table-wrapper {
+    flex: 2;
+    min-width: 500px;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff3e6;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+table:hover {
+    transform: translateY(-3px);
+}
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ffcc99;
+}
+th {
+    background: #d1411e;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+td {
+    font-weight: bold;
+}
+
+/* Table Row Hover */
+tbody tr:hover {
+    background: #ffe0b3;
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+
+/* Action Buttons */
+td .btn-update, td .btn-delete {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 5px 12px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+td .btn-update {
+    background: #ff9933;
+}
+td .btn-delete {
+    background: #d1411e;
+}
+td .btn-update:hover, td .btn-delete:hover {
+    transform: scale(1.2) rotate(-5deg);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Bounce Animation for Header */
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+/* Responsive */
+@media(max-width: 900px) {
+    #container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
