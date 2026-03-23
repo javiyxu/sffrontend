@@ -1,19 +1,47 @@
 const submit = document.querySelector("#add");
 const update = document.querySelector("#update");
 const content = document.querySelector("#tableBody");
+
 const API = "https://sfbackend-uwjg.onrender.com/api/orders";
 
+// ─── ADD ORDER (POST) ───
+submit.addEventListener("click", () => {
+    let customer_name = document.querySelector("#customer").value;
+    let pizza_type = document.querySelector("#pizzaType").value;
+    let size = document.querySelector("#pizzaSize").value;
+    let quantity = document.querySelector("#quantity").value;
+    let instructions = document.querySelector("#instructions").value;
 
-update.style.display = "none"; // 
+    let formData = { customer_name, pizza_type, size, quantity, instructions };
 
-window.addEventListener("load", () => loadOrders());
+    fetch(API, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).catch((error) => {
+        console.log(error);
+    });
+
+    alert("Order Added Successfully");
+    location.reload();
+});
+
 
 // ─── LOAD ORDERS ───
-function loadOrders() {
+window.addEventListener("load", () => {
+    getOrders();
+});
+
+function getOrders() {
+    let html = "";
+
     fetch(API)
-        .then(res => res.json())
+        .then(response => response.json())
         .then(data => {
-            content.innerHTML = data.map(order => `
+            data.forEach(order => {
+                html += `
                 <tr>
                     <td>${order.id}</td>
                     <td>${order.customer_name}</td>
@@ -23,67 +51,49 @@ function loadOrders() {
                     <td>${order.instructions}</td>
                     <td>
                         <div class="actions">
-                            <a href="javascript:void(0)" onclick="editOrder(${order.id})">
+                            <a href="javascript:void(0)" onClick="editOrder(${order.id})">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a href="javascript:void(0)" onclick="deleteOrder(${order.id})">
+                            <a href="javascript:void(0)" onClick="deleteOrder(${order.id})">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </div>
                     </td>
                 </tr>
-            `).join('');
+                `;
+            });
+
+            content.innerHTML = html;
         })
-        .catch(err => console.error("Error fetching orders:", err));
+        .catch(error => {
+            console.log(error);
+        });
 }
 
-// ─── GET FORM DATA ───
-function getFormData() {
-    const customer_name = document.querySelector("#customer").value.trim();
-    const pizza_type = document.querySelector("#pizzaType").value;
-    const size = document.querySelector("#pizzaSize").value;
-    const quantity = parseInt(document.querySelector("#quantity").value);
-    const instructions = document.querySelector("#instructions").value.trim();
-
-    if (!customer_name || !pizza_type || !size || isNaN(quantity) || quantity <= 0) {
-        alert("Please fill all required fields correctly.");
-        return null;
-    }
-
-    return { customer_name, pizza_type, size, quantity, instructions };
-}
-
-// ─── ADD ORDER ───
-submit.addEventListener("click", () => {
-    const data = getFormData();
-    if (!data) return;
-
-    fetch(API, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    })
-    .then(() => {
-        clearForm();
-        loadOrders();
-        alert("Order added successfully!");
-    })
-    .catch(err => console.error(err));
-});
 
 // ─── DELETE ORDER ───
 function deleteOrder(id) {
-    if (!confirm("Delete this order?")) return;
-
-    fetch(`${API}/${id}`, { method: "DELETE" })
-        .then(() => loadOrders())
-        .catch(err => console.error(err));
+    if (confirm("Are you sure you want to delete this order?")) {
+        fetch(`${API}/${id}`, {
+            method: "DELETE",
+        })
+        .then(response => response.text())
+        .then(() => {
+            location.reload();
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    } else {
+        alert("You Canceled!");
+    }
 }
 
-// ─── EDIT ORDER ───
+
+// ─── GET ORDER DATA FOR EDIT ───
 function editOrder(id) {
     fetch(`${API}/${id}`)
-        .then(res => res.json())
+        .then(response => response.json())
         .then(order => {
             document.querySelector("#customer").value = order.customer_name;
             document.querySelector("#pizzaType").value = order.pizza_type;
@@ -91,40 +101,34 @@ function editOrder(id) {
             document.querySelector("#quantity").value = order.quantity;
             document.querySelector("#instructions").value = order.instructions;
             document.querySelector("#orderID").value = order.id;
-
-            submit.style.display = "none";
-            update.style.display = "inline-block";
         })
-        .catch(err => console.error(err));
+        .catch(error => {
+            console.log(error);
+        });
 }
 
-// ─── UPDATE ORDER ───
+
+// ─── UPDATE ORDER (PUT) ───
 update.addEventListener("click", () => {
-    const id = document.querySelector("#orderID").value;
-    const data = getFormData();
-    if (!data) return;
+    let customer_name = document.querySelector("#customer").value;
+    let pizza_type = document.querySelector("#pizzaType").value;
+    let size = document.querySelector("#pizzaSize").value;
+    let quantity = document.querySelector("#quantity").value;
+    let instructions = document.querySelector("#instructions").value;
+    let id = document.querySelector("#orderID").value;
+
+    let formData = { customer_name, pizza_type, size, quantity, instructions, id };
 
     fetch(`${API}/${id}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    })
-    .then(() => {
-        clearForm();
-        loadOrders();
-        submit.style.display = "inline-block";
-        update.style.display = "none";
-        alert("Order updated successfully!");
-    })
-    .catch(err => console.error(err));
-});
+        body: JSON.stringify(formData),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).catch((error) => {
+        console.log(error);
+    });
 
-// ─── CLEAR FORM ───
-function clearForm() {
-    document.querySelector("#customer").value = "";
-    document.querySelector("#pizzaType").value = "Margherita";
-    document.querySelector("#pizzaSize").value = "Small";
-    document.querySelector("#quantity").value = "";
-    document.querySelector("#instructions").value = "";
-    document.querySelector("#orderID").value = "";
-}
+    alert("Order Updated Successfully");
+    location.reload();
+});
