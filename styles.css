@@ -1,12 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto&display=swap');
 
-/* General Body */
+/* Body */
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #ffe6b3, #ffd699);
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    background: linear-gradient(135deg, #ffe0b3, #ffcc80, #ffb84d);
+    background-size: 300% 300%;
+    animation: bgShift 12s ease infinite;
+}
+
+/* Floating pizza decorations */
+body::before {
+    content: "🍕 🍕 🍕 🍕 🍕";
+    position: fixed;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    font-size: 2rem;
+    opacity: 0.08;
+    animation: floatPizza 20s linear infinite;
+    pointer-events: none;
 }
 
 /* Header */
@@ -15,9 +30,9 @@ h1 {
     font-family: 'Fredoka One', cursive;
     font-size: 3em;
     color: #d1411e;
-    text-shadow: 2px 2px #ffcc80;
+    text-shadow: 2px 2px #ffcc80, 0 0 15px rgba(255, 140, 0, 0.4);
     margin: 20px 0;
-    animation: bounce 1s infinite alternate;
+    animation: bounceGlow 2s infinite alternate;
 }
 
 /* Container */
@@ -29,58 +44,99 @@ h1 {
     padding: 20px;
 }
 
-/* Form */
+/* Form (Glassmorphism) */
 #form {
-    background: #fff3e6;
+    background: rgba(255, 243, 230, 0.7);
+    backdrop-filter: blur(10px);
     padding: 25px;
     border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     min-width: 300px;
     flex: 1;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-#form:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.3);
 }
 
-/* Form Elements */
+#form:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+/* Labels */
 #form label {
     display: block;
     margin-top: 15px;
     font-weight: bold;
     color: #d1411e;
+    transition: 0.3s;
 }
-#form input, #form select, #form button {
+
+/* Inputs */
+#form input, #form select {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-top: 5px;
     border-radius: 10px;
     border: 1px solid #d9a066;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-#form input:focus, #form select:focus {
     outline: none;
-    box-shadow: 0 0 10px #ff9933;
-    transform: scale(1.02);
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.8);
 }
 
-/* Buttons */
+/* Input focus animation */
+#form input:focus, #form select:focus {
+    box-shadow: 0 0 12px #ff9933;
+    transform: scale(1.03);
+    border-color: #ff9933;
+}
+
+/* Button */
 #form button {
-    background: #d1411e;
-    color: white;
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    border-radius: 12px;
     border: none;
     cursor: pointer;
     font-weight: bold;
-    margin-top: 20px;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-#form button:hover {
-    background: #ff9933;
-    transform: scale(1.05);
+    color: white;
+    background: linear-gradient(135deg, #d1411e, #ff7a18);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
-/* Table Wrapper */
+/* Button hover */
+#form button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Button active */
+#form button:active {
+    transform: scale(0.97);
+}
+
+/* Ripple effect */
+#form button::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 50%;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+#form button:active::after {
+    width: 200px;
+    height: 200px;
+}
+
+/* Table wrapper */
 #table-wrapper {
     flex: 2;
     min-width: 500px;
@@ -90,62 +146,89 @@ h1 {
 table {
     width: 100%;
     border-collapse: collapse;
-    background: #fff3e6;
+    background: rgba(255,243,230,0.8);
+    backdrop-filter: blur(8px);
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     transition: transform 0.3s ease;
 }
+
 table:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
 }
-th, td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #ffcc99;
-}
+
+/* Table header */
 th {
-    background: #d1411e;
+    background: linear-gradient(135deg, #d1411e, #ff7a18);
     color: white;
+    padding: 14px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+
+/* Table cells */
 td {
+    padding: 12px;
+    text-align: center;
     font-weight: bold;
+    border-bottom: 1px solid #ffcc99;
 }
 
-/* Table Row Hover */
-tbody tr:hover {
-    background: #ffe0b3;
-    transform: scale(1.02);
+/* Row hover */
+tbody tr {
     transition: all 0.3s ease;
 }
 
-/* Action Buttons */
+tbody tr:hover {
+    background: rgba(255, 224, 179, 0.8);
+    transform: scale(1.02);
+}
+
+/* Action buttons */
 td .btn-update, td .btn-delete {
     display: inline-block;
     margin: 0 5px;
-    padding: 5px 12px;
+    padding: 6px 12px;
     border-radius: 10px;
     color: white;
     text-decoration: none;
-    transition: transform 0.2s ease;
+    transition: all 0.3s ease;
 }
+
 td .btn-update {
     background: #ff9933;
 }
+
 td .btn-delete {
     background: #d1411e;
 }
-td .btn-update:hover, td .btn-delete:hover {
-    transform: scale(1.2) rotate(-5deg);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+
+td .btn-update:hover {
+    transform: scale(1.2) rotate(-3deg);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-/* Bounce Animation for Header */
-@keyframes bounce {
+td .btn-delete:hover {
+    transform: scale(1.2) rotate(3deg);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Animations */
+@keyframes bounceGlow {
+    0% { transform: translateY(0); text-shadow: 2px 2px #ffcc80; }
+    100% { transform: translateY(-8px); text-shadow: 2px 2px #ffcc80, 0 0 20px #ff9933; }
+}
+
+@keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes floatPizza {
     0% { transform: translateY(0); }
-    100% { transform: translateY(-10px); }
+    100% { transform: translateY(100vh); }
 }
 
 /* Responsive */
