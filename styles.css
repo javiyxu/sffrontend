@@ -1,1 +1,245 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto&display=swap'); /* Body */ body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; overflow-x: hidden; background: linear-gradient(135deg, #ffe0b3, #ffcc80, #ffb84d); background-size: 300% 300%; animation: bgShift 12s ease infinite; } /* Floating pizza decorations */ body::before { content: " "; position: fixed; top: -50px; left: 0; width: 100%; font-size: 2rem; opacity: 0.08; animation: floatPizza 20s linear infinite; pointer-events: none; } /* Header */ h1 { text-align: center; font-family: 'Fredoka One', cursive; font-size: 3em; color: #d1411e; text-shadow: 2px 2px #ffcc80, 0 0 15px rgba(255, 140, 0, 0.4); margin: 20px 0; animation: bounceGlow 2s infinite alternate; } /* Container */ #container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; padding: 20px; } /* Form (Glassmorphism) */ #form { background: rgba(255, 243, 230, 0.7); backdrop-filter: blur(10px); padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); min-width: 300px; flex: 1; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3); } #form:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 15px 40px rgba(0,0,0,0.3); } /* Labels */ #form label { display: block; margin-top: 15px; font-weight: bold; color: #d1411e; transition: 0.3s; } /* Inputs */ #form input, #form select { width: 100%; padding: 12px; margin-top: 5px; border-radius: 10px; border: 1px solid #d9a066; outline: none; transition: all 0.3s ease; background: rgba(255,255,255,0.8); } /* Input focus animation */ #form input:focus, #form select:focus { box-shadow: 0 0 12px #ff9933; transform: scale(1.03); border-color: #ff9933; } /* Button */ #form button { width: 100%; padding: 12px; margin-top: 20px; border-radius: 12px; border: none; cursor: pointer; font-weight: bold; color: white; background: linear-gradient(135deg, #d1411e, #ff7a18); position: relative; overflow: hidden; transition: all 0.3s ease; } /* Button hover */ #form button:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.3); } /* Button active */ #form button:active { transform: scale(0.97); } /* Ripple effect */ #form button::after { content: ""; position: absolute; width: 0; height: 0; top: 50%; left: 50%; background: rgba(255,255,255,0.5); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.4s ease, height 0.4s ease; } #form button:active::after { width: 200px; height: 200px; } /* Table wrapper */ #table-wrapper { flex: 2; min-width: 500px; } /* Table */ table { width: 100%; border-collapse: collapse; background: rgba(255,243,230,0.8); backdrop-filter: blur(8px); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.2); transition: transform 0.3s ease; } table:hover { transform: translateY(-5px); } /* Table header */ th { background: linear-gradient(135deg, #d1411e, #ff7a18); color: white; padding: 14px; text-transform: uppercase; letter-spacing: 1px; } /* Table cells */ td { padding: 12px; text-align: center; font-weight: bold; border-bottom: 1px solid #ffcc99; } /* Row hover */ tbody tr { transition: all 0.3s ease; } tbody tr:hover { background: rgba(255, 224, 179, 0.8); transform: scale(1.02); } /* Action buttons */ td .btn-update, td .btn-delete { display: inline-block; margin: 0 5px; padding: 6px 12px; border-radius: 10px; color: white; text-decoration: none; transition: all 0.3s ease; } td .btn-update { background: #ff9933; } td .btn-delete { background: #d1411e; } td .btn-update:hover { transform: scale(1.2) rotate(-3deg); box-shadow: 0 5px 15px rgba(0,0,0,0.3); } td .btn-delete:hover { transform: scale(1.2) rotate(3deg); box-shadow: 0 5px 15px rgba(0,0,0,0.3); } /* Animations */ @keyframes bounceGlow { 0% { transform: translateY(0); text-shadow: 2px 2px #ffcc80; } 100% { transform: translateY(-8px); text-shadow: 2px 2px #ffcc80, 0 0 20px #ff9933; } } @keyframes bgShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } } @keyframes floatPizza { 0% { transform: translateY(0); } 100% { transform: translateY(100vh); } } /* Responsive */ @media(max-width: 900px) { #container { flex-direction: column; align-items: center; } }
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;600&display=swap');
+
+body{
+font-family:'Poppins',sans-serif;
+margin:0;
+padding:0;
+overflow-x:hidden;
+background:linear-gradient(135deg,#ffb347,#ffcc33,#ff9966);
+background-size:400% 400%;
+animation:bgMove 12s ease infinite;
+}
+
+/* FLOATING PIZZAS */
+
+body::before{
+content:"🍕 🍕 🍕 🍕 🍕 🍕 🍕 🍕";
+position:fixed;
+top:-50px;
+left:0;
+width:100%;
+font-size:2rem;
+opacity:0.1;
+animation:floatPizza 25s linear infinite;
+pointer-events:none;
+}
+
+
+/* HEADER */
+
+h1{
+text-align:center;
+font-family:'Fredoka One';
+font-size:3.2em;
+color:#c0392b;
+text-shadow:3px 3px #ffd27f;
+animation:titleFloat 2s ease-in-out infinite alternate;
+}
+
+
+/* CONTAINER */
+
+#container{
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+justify-content:center;
+padding:30px;
+}
+
+
+/* FORM CARD */
+
+#form{
+background:rgba(255,255,255,0.4);
+backdrop-filter:blur(15px);
+border-radius:20px;
+padding:30px;
+box-shadow:0 15px 40px rgba(0,0,0,0.2);
+transition:0.3s;
+min-width:320px;
+border:1px solid rgba(255,255,255,0.4);
+}
+
+#form:hover{
+transform:translateY(-10px) scale(1.02);
+box-shadow:0 20px 50px rgba(0,0,0,0.3);
+}
+
+
+/* LABELS */
+
+#form label{
+font-weight:600;
+color:#d35400;
+margin-top:10px;
+display:block;
+}
+
+
+/* INPUTS */
+
+#form input,
+#form select{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:none;
+margin-top:5px;
+background:rgba(255,255,255,0.7);
+transition:0.3s;
+}
+
+#form input:focus,
+#form select:focus{
+outline:none;
+transform:scale(1.04);
+box-shadow:0 0 10px orange;
+}
+
+
+/* BUTTONS */
+
+#form button{
+width:100%;
+padding:12px;
+margin-top:15px;
+border:none;
+border-radius:12px;
+font-weight:600;
+cursor:pointer;
+color:white;
+background:linear-gradient(45deg,#e74c3c,#ff9f43);
+transition:0.3s;
+}
+
+#form button:hover{
+transform:scale(1.08);
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+
+/* TABLE CARD */
+
+#table-wrapper{
+flex:2;
+min-width:500px;
+background:rgba(255,255,255,0.4);
+backdrop-filter:blur(10px);
+padding:20px;
+border-radius:20px;
+box-shadow:0 15px 40px rgba(0,0,0,0.2);
+}
+
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+overflow:hidden;
+}
+
+
+/* HEADER */
+
+th{
+background:linear-gradient(45deg,#e74c3c,#ff9f43);
+color:white;
+padding:14px;
+font-weight:600;
+}
+
+
+/* CELLS */
+
+td{
+padding:12px;
+text-align:center;
+border-bottom:1px solid rgba(0,0,0,0.1);
+}
+
+
+/* ROW HOVER */
+
+tbody tr{
+transition:0.3s;
+}
+
+tbody tr:hover{
+background:rgba(255,204,153,0.5);
+transform:scale(1.02);
+}
+
+
+/* ACTION ICONS */
+
+.actions i{
+cursor:pointer;
+margin:0 8px;
+font-size:1.2rem;
+transition:0.3s;
+}
+
+.fa-edit{
+color:#f39c12;
+}
+
+.fa-trash{
+color:#e74c3c;
+}
+
+.actions i:hover{
+transform:scale(1.4) rotate(10deg);
+}
+
+
+/* SEARCH BAR */
+
+#searchBar{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:none;
+margin-bottom:15px;
+background:white;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+
+/* ORDER COUNTER */
+
+#stats{
+font-weight:600;
+margin-bottom:10px;
+color:#c0392b;
+}
+
+
+/* ANIMATIONS */
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+@keyframes floatPizza{
+0%{transform:translateY(0)}
+100%{transform:translateY(100vh)}
+}
+
+@keyframes titleFloat{
+from{transform:translateY(0)}
+to{transform:translateY(-10px)}
+}
+
+
+/* MOBILE */
+
+@media(max-width:900px){
+#container{
+flex-direction:column;
+align-items:center;
+}
+}
