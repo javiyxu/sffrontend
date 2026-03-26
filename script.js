@@ -133,22 +133,6 @@ location.reload();
 });
 
 
-// SEARCH
-
-document.querySelector("#searchBar").addEventListener("keyup",function(){
-
-let filter=this.value.toLowerCase();
-let rows=document.querySelectorAll("#tableBody tr");
-
-rows.forEach(row=>{
-
-let name=row.children[1].textContent.toLowerCase();
-
-if(name.includes(filter)){
-row.style.display="";
-}else{
-row.style.display="none";
-}
 
 });
 
