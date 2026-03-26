@@ -4,7 +4,7 @@ const content = document.querySelector("#tableBody");
 
 const API = "https://sfbackend-uwjg.onrender.com/api/orders";
 
-// ADD ORDER
+
 submit.addEventListener("click", () => {
 
   let customer_name = document.querySelector("#customer").value;
@@ -29,13 +29,13 @@ submit.addEventListener("click", () => {
 });
 
 
-// LOAD ORDERS ON PAGE LOAD
+
 window.addEventListener("load", () => {
   getOrders();
 });
 
 
-// GET ALL ORDERS
+
 function getOrders() {
 
   let html = "";
@@ -73,7 +73,7 @@ function getOrders() {
 }
 
 
-// DELETE ORDER
+
 function deleteOrder(id) {
 
   if (confirm("Delete this order?")) {
@@ -88,7 +88,7 @@ function deleteOrder(id) {
 }
 
 
-// EDIT ORDER (populate form)
+
 function editOrder(id) {
 
   fetch(`${API}/${id}`)
@@ -107,7 +107,7 @@ function editOrder(id) {
 }
 
 
-// UPDATE ORDER
+
 update.addEventListener("click", () => {
 
   let id = document.querySelector("#orderID").value;
@@ -134,7 +134,7 @@ update.addEventListener("click", () => {
 });
 
 
-// ORDER COUNTER
+
 function updateStats() {
   let rows = document.querySelectorAll("#tableBody tr");
   document.querySelector("#totalOrders").innerText = rows.length;
