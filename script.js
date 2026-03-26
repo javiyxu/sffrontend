@@ -15,7 +15,7 @@ submit.addEventListener("click", () => {
 
   let formData = { customer_name, pizza_type, size, quantity, instructions };
 
-  // FIX: Wait for fetch to complete before alerting and reloading
+
   fetch(API, {
     method: "POST",
     body: JSON.stringify(formData),
@@ -120,7 +120,7 @@ update.addEventListener("click", () => {
 
   let formData = { customer_name, pizza_type, size, quantity, instructions };
 
-  // FIX: Wait for fetch to complete before alerting and reloading
+ 
   fetch(`${API}/${id}`, {
     method: "PUT",
     body: JSON.stringify(formData),
