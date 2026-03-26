@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;600&display=swap');
 
-/* FIX: Added box-sizing so inputs don't overflow their container */
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -15,7 +15,7 @@ body {
   animation: bgMove 12s ease infinite;
 }
 
-/* FLOATING PIZZAS */
+
 body::before {
   content: "🍕 🍕 🍕 🍕 🍕 🍕 🍕 🍕";
   position: fixed;
@@ -28,7 +28,7 @@ body::before {
   pointer-events: none;
 }
 
-/* HEADER */
+
 h1 {
   text-align: center;
   font-family: 'Fredoka One';
@@ -38,7 +38,7 @@ h1 {
   animation: titleFloat 2s ease-in-out infinite alternate;
 }
 
-/* CONTAINER */
+
 #container {
   display: flex;
   flex-wrap: wrap;
@@ -47,7 +47,7 @@ h1 {
   padding: 30px;
 }
 
-/* FORM CARD */
+
 #form {
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(15px);
@@ -64,7 +64,7 @@ h1 {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
-/* LABELS */
+
 #form label {
   font-weight: 600;
   color: #d35400;
@@ -72,7 +72,7 @@ h1 {
   display: block;
 }
 
-/* INPUTS */
+
 #form input,
 #form select {
   width: 100%;
@@ -91,7 +91,7 @@ h1 {
   box-shadow: 0 0 10px orange;
 }
 
-/* BUTTONS */
+
 #form button {
   width: 100%;
   padding: 12px;
@@ -110,7 +110,7 @@ h1 {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* TABLE CARD */
+
 #table-wrapper {
   flex: 2;
   min-width: 500px;
@@ -122,14 +122,14 @@ h1 {
   overflow-x: auto;
 }
 
-/* TABLE */
+
 table {
   width: 100%;
   border-collapse: collapse;
   overflow: hidden;
 }
 
-/* HEADER */
+
 th {
   background: linear-gradient(45deg, #e74c3c, #ff9f43);
   color: white;
@@ -137,14 +137,14 @@ th {
   font-weight: 600;
 }
 
-/* CELLS */
+
 td {
   padding: 12px;
   text-align: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* ROW HOVER */
+
 tbody tr {
   transition: 0.3s;
 }
@@ -154,7 +154,7 @@ tbody tr:hover {
   transform: scale(1.02);
 }
 
-/* ACTION ICONS */
+
 .actions i {
   cursor: pointer;
   margin: 0 8px;
@@ -174,7 +174,7 @@ tbody tr:hover {
   transform: scale(1.4) rotate(10deg);
 }
 
-/* SEARCH BAR */
+
 #searchBar {
   width: 100%;
   padding: 12px;
@@ -185,14 +185,14 @@ tbody tr:hover {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* ORDER COUNTER */
+
 #stats {
   font-weight: 600;
   margin-bottom: 10px;
   color: #c0392b;
 }
 
-/* ANIMATIONS */
+
 @keyframes bgMove {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
@@ -209,7 +209,7 @@ tbody tr:hover {
   to   { transform: translateY(-10px); }
 }
 
-/* MOBILE */
+
 @media (max-width: 900px) {
   #container {
     flex-direction: column;
