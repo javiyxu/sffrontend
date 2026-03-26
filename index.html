@@ -1,73 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PIZZA NI JANRI</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-   
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PIZZA NI JANRI</title>
+
+<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
+
 <body>
-    <h1>PIZZA NI JANRI</h1>
 
-    <div id="container">
-        <!-- PIZZA ORDER FORM -->
-        <div id="form">
-            <label>Customer Name</label>
-            <input type="text" id="customer" placeholder="e.g. Juan dela Cruz">
+<h1>🍕 PIZZA NI JANRI</h1>
 
-            <label>Pizza Type</label>
-            <select id="pizzaType">
-                <option value="Margherita">Margherita</option>
-                <option value="Pepperoni">Pepperoni</option>
-                <option value="Hawaiian">Hawaiian</option>
-                <option value="Vegetarian">Vegetarian</option>
-                <option value="Cheese">Cheese</option>
-            </select>
+<div id="container">
 
-            <label>Size</label>
-            <select id="pizzaSize">
-                <option value="Small">Small</option>
-                <option value="Medium">Medium</option>
-                <option value="Large">Large</option>
-            </select>
+<!-- FORM -->
+<div id="form">
 
-            <label>Quantity</label>
-            <input type="number" id="quantity" placeholder="e.g. 2">
+<label>Customer Name</label>
+<input type="text" id="customer">
 
-            <label>Special Instructions</label>
-            <input type="text" id="instructions" placeholder="e.g. extra cheese, no onions">
+<label>Pizza Type</label>
+<select id="pizzaType">
+<option value="Margherita">Margherita</option>
+<option value="Pepperoni">Pepperoni</option>
+<option value="Hawaiian">Hawaiian</option>
+<option value="Vegetarian">Vegetarian</option>
+<option value="Cheese">Cheese</option>
+</select>
 
-            <button id="add">Add Order</button>
-            <button id="update">Update Order</button>
-            <input type="hidden" id="orderID">
-        </div>
+<label>Size</label>
+<select id="pizzaSize">
+<option value="Small">Small</option>
+<option value="Medium">Medium</option>
+<option value="Large">Large</option>
+</select>
 
-        <!-- ORDERS TABLE -->
-        <div id="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Customer</th>
-                        <th>Pizza Type</th>
-                        <th>Size</th>
-                        <th>Quantity</th>
-                        <th>Instructions</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    <!-- Orders appear here dynamically -->
-                </tbody>
-            </table>
-        </div>
-    </div>
+<label>Quantity</label>
+<input type="number" id="quantity">
 
-    <!-- JS SCRIPT -->
-    <script src="script.js"></script>
+<label>Special Instructions</label>
+<input type="text" id="instructions">
+
+<button id="add">Add Order</button>
+<button id="update">Update Order</button>
+
+<input type="hidden" id="orderID">
+
+</div>
+
+<!-- TABLE -->
+<div id="table-wrapper">
+
+<input type="text" id="searchBar" placeholder="🔍 Search customer">
+
+<div id="stats">
+Total Orders: <span id="totalOrders">0</span>
+</div>
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Customer</th>
+<th>Pizza</th>
+<th>Size</th>
+<th>Quantity</th>
+<th>Instructions</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="tableBody"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
 
