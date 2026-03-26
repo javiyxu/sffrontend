@@ -1,1 +1,166 @@
-<script src="script.js"></script> </body> </html> const submit = document.querySelector("#add"); const update = document.querySelector("#update"); const content = document.querySelector("#tableBody"); const API = "https://sfbackend-uwjg.onrender.com/api/orders"; // ─── ADD ORDER (POST) ─── submit.addEventListener("click", () => { let customer_name = document.querySelector("#customer").value; let pizza_type = document.querySelector("#pizzaType").value; let size = document.querySelector("#pizzaSize").value; let quantity = document.querySelector("#quantity").value; let instructions = document.querySelector("#instructions").value; let formData = { customer_name, pizza_type, size, quantity, instructions }; fetch(API, { method: "POST", body: JSON.stringify(formData), headers: { "Content-Type": "application/json", }, }).catch((error) => { console.log(error); }); alert("Order Added Successfully"); location.reload(); }); // ─── LOAD ORDERS ─── window.addEventListener("load", () => { getOrders(); }); function getOrders() { let html = ""; fetch(API) .then(response => response.json()) .then(data => { data.forEach(order => { html += <tr> <td>${order.id}</td> <td>${order.customer_name}</td> <td>${order.pizza_type}</td> <td>${order.size}</td> <td>${order.quantity}</td> <td>${order.instructions}</td> <td> <div class="actions"> <a href="javascript:void(0)" onClick="editOrder(${order.id})"> <i class="fas fa-edit"></i> </a> <a href="javascript:void(0)" onClick="deleteOrder(${order.id})"> <i class="fas fa-trash"></i> </a> </div> </td> </tr> ; }); content.innerHTML = html; }) .catch(error => { console.log(error); }); } // ─── DELETE ORDER ─── function deleteOrder(id) { if (confirm("Are you sure you want to delete this order?")) { fetch(${API}/${id}, { method: "DELETE", }) .then(response => response.text()) .then(() => { location.reload(); }) .catch(error => { console.log(error); }); } else { alert("You Canceled!"); } } // ─── GET ORDER DATA FOR EDIT ─── function editOrder(id) { fetch(${API}/${id}) .then(response => response.json()) .then(order => { document.querySelector("#customer").value = order.customer_name; document.querySelector("#pizzaType").value = order.pizza_type; document.querySelector("#pizzaSize").value = order.size; document.querySelector("#quantity").value = order.quantity; document.querySelector("#instructions").value = order.instructions; document.querySelector("#orderID").value = order.id; }) .catch(error => { console.log(error); }); } // ─── UPDATE ORDER (PUT) ─── update.addEventListener("click", () => { let customer_name = document.querySelector("#customer").value; let pizza_type = document.querySelector("#pizzaType").value; let size = document.querySelector("#pizzaSize").value; let quantity = document.querySelector("#quantity").value; let instructions = document.querySelector("#instructions").value; let id = document.querySelector("#orderID").value; let formData = { customer_name, pizza_type, size, quantity, instructions, id }; fetch(${API}/${id}, { method: "PUT", body: JSON.stringify(formData), headers: { "Content-Type": "application/json", }, }).catch((error) => { console.log(error); }); alert("Order Updated Successfully"); location.reload(); });
+const submit = document.querySelector("#add");
+const update = document.querySelector("#update");
+const content = document.querySelector("#tableBody");
+
+const API = "https://sfbackend-uwjg.onrender.com/api/orders";
+
+submit.addEventListener("click", () => {
+
+let customer_name = document.querySelector("#customer").value;
+let pizza_type = document.querySelector("#pizzaType").value;
+let size = document.querySelector("#pizzaSize").value;
+let quantity = document.querySelector("#quantity").value;
+let instructions = document.querySelector("#instructions").value;
+
+let formData = {customer_name,pizza_type,size,quantity,instructions};
+
+fetch(API,{
+method:"POST",
+body:JSON.stringify(formData),
+headers:{ "Content-Type":"application/json"}
+});
+
+alert("Order Added");
+location.reload();
+
+});
+
+
+window.addEventListener("load",()=>{
+getOrders();
+});
+
+
+function getOrders(){
+
+let html="";
+
+fetch(API)
+.then(res=>res.json())
+.then(data=>{
+
+data.forEach(order=>{
+
+html+=`
+<tr>
+
+<td>${order.id}</td>
+<td>${order.customer_name}</td>
+<td>${order.pizza_type}</td>
+<td>${order.size}</td>
+<td>${order.quantity}</td>
+<td>${order.instructions}</td>
+
+<td>
+
+<div class="actions">
+
+<i class="fas fa-edit" onclick="editOrder(${order.id})"></i>
+
+<i class="fas fa-trash" onclick="deleteOrder(${order.id})"></i>
+
+</div>
+
+</td>
+
+</tr>
+`;
+
+});
+
+content.innerHTML=html;
+
+updateStats();
+
+});
+
+}
+
+
+function deleteOrder(id){
+
+if(confirm("Delete this order?")){
+
+fetch(`${API}/${id}`,{
+method:"DELETE"
+})
+.then(()=>location.reload());
+
+}
+
+}
+
+
+function editOrder(id){
+
+fetch(`${API}/${id}`)
+.then(res=>res.json())
+.then(order=>{
+
+document.querySelector("#customer").value=order.customer_name;
+document.querySelector("#pizzaType").value=order.pizza_type;
+document.querySelector("#pizzaSize").value=order.size;
+document.querySelector("#quantity").value=order.quantity;
+document.querySelector("#instructions").value=order.instructions;
+document.querySelector("#orderID").value=order.id;
+
+});
+
+}
+
+
+update.addEventListener("click",()=>{
+
+let id=document.querySelector("#orderID").value;
+
+let customer_name=document.querySelector("#customer").value;
+let pizza_type=document.querySelector("#pizzaType").value;
+let size=document.querySelector("#pizzaSize").value;
+let quantity=document.querySelector("#quantity").value;
+let instructions=document.querySelector("#instructions").value;
+
+let formData={customer_name,pizza_type,size,quantity,instructions};
+
+fetch(`${API}/${id}`,{
+method:"PUT",
+body:JSON.stringify(formData),
+headers:{ "Content-Type":"application/json"}
+});
+
+alert("Order Updated");
+location.reload();
+
+});
+
+
+// SEARCH
+
+document.querySelector("#searchBar").addEventListener("keyup",function(){
+
+let filter=this.value.toLowerCase();
+let rows=document.querySelectorAll("#tableBody tr");
+
+rows.forEach(row=>{
+
+let name=row.children[1].textContent.toLowerCase();
+
+if(name.includes(filter)){
+row.style.display="";
+}else{
+row.style.display="none";
+}
+
+});
+
+});
+
+
+// ORDER COUNTER
+
+function updateStats(){
+
+let rows=document.querySelectorAll("#tableBody tr");
+
+document.querySelector("#totalOrders").innerText=rows.length;
+
+}
