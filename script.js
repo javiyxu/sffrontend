@@ -133,7 +133,7 @@ location.reload();
 });
 
 
-// SEARCH
+
 
 document.querySelector("#searchBar").addEventListener("keyup",function(){
 
@@ -155,7 +155,7 @@ row.style.display="none";
 });
 
 
-// ORDER COUNTER
+
 
 function updateStats(){
 
