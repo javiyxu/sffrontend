@@ -11,7 +11,7 @@ animation:bgMove 10s infinite;
 /* floating pizza */
 
 body::before{
-content:"🍕 🍕 🍕 🍕 🍕 🍕 🍕";
+content:"";
 position:fixed;
 top:-40px;
 width:100%;
